@@ -39,15 +39,42 @@ for (let i = 0; i < frameCount; i++) {
 
   img.onload = () => {
     loadedCount++;
-    console.log(`Loaded ${loadedCount}/${frameCount} frames`);
     
-    // Draw the first frame on the canvas when the page loads
-    // Specifically when the first frame loads, we draw it right away
-    if (i === 0) {
-      drawFirstFrame();
-    }
-    
+    // Update loader progress
+    const percent = Math.round(
+      (loadedCount / frameCount) * 100
+    );
+    document.getElementById('loader-bar')
+      .style.width = percent + '%';
+    document.getElementById('loader-percent')
+      .textContent = percent + '%';
+
     if (loadedCount === frameCount) {
+      setTimeout(() => {
+        const loader = document.getElementById('loader');
+        const content = document.getElementById('loader-content');
+        
+        // Fade out content first
+        content.style.transition = 'opacity 0.6s ease';
+        content.style.opacity = '0';
+        
+        // Then fade out entire loader
+        setTimeout(() => {
+          loader.style.opacity = '0';
+          setTimeout(() => {
+            loader.style.display = 'none';
+            drawFirstFrame();
+            updateOverlays(0); // Trigger first text instantly
+            
+            // Fade in navbar after loader
+            const navbar = document.getElementById('navbar');
+            navbar.style.transition = 'opacity 1s ease';
+            navbar.style.opacity = '1';
+          }, 1200);
+        }, 400);
+        
+      }, 300);
+      
       console.log("Aeon ready");
 
       // Scroll container height
@@ -83,18 +110,27 @@ window.addEventListener("resize", () => {
 
 function updateOverlays(fraction) {
   // text-1: visible 0-20%
-  document.getElementById('text-1').style.opacity =
-    fraction < 0.20 ? 1 : 0;
+  toggleOverlay('text-1', 
+    fraction < 0.20);
 
   // text-2: visible 30-50%
-  document.getElementById('text-2').style.opacity =
-    fraction > 0.30 && fraction < 0.50 ? 1 : 0;
+  toggleOverlay('text-2', 
+    fraction > 0.30 && fraction < 0.50);
 
   // text-3: visible 55-75%
-  document.getElementById('text-3').style.opacity =
-    fraction > 0.55 && fraction < 0.75 ? 1 : 0;
+  toggleOverlay('text-3', 
+    fraction > 0.55 && fraction < 0.75);
 
   // cta-card: visible 82-100%
-  document.getElementById('cta-card').style.opacity =
-    fraction > 0.82 ? 1 : 0;
+  toggleOverlay('cta-card', 
+    fraction > 0.82);
+}
+
+function toggleOverlay(id, isVisible) {
+  const el = document.getElementById(id);
+  if (isVisible) {
+    el.classList.add('visible');
+  } else {
+    el.classList.remove('visible');
+  }
 }
