@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aeon - Neural Wearable</title>
+
+    <!-- Inter Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;600&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Canvas sequence -->
+    <canvas id="seq-canvas"></canvas>
+    
+    <!-- Section 1: 0-20% scroll -->
+    <div class="overlay" id="text-1">
+      <h1>Master the Noise.</h1>
+    </div>
+    
+    <!-- Section 2: 30-50% scroll -->
+    <div class="overlay" id="text-2">
+      <h1>Clarity, engineered.</h1>
+    </div>
+    
+    <!-- Section 3: 55-75% scroll -->
+    <div class="overlay" id="text-3">
+      <h1>Your rhythm. Amplified.</h1>
+    </div>
+    
+    <!-- Section 4: 82-100% scroll -->
+    <div class="overlay" id="cta-card">
+      <div class="glass-card">
+        <p class="tagline">Neural wearable. 2025.</p>
+        <h2>Reserve your focus.</h2>
+        <p class="subtitle">Pre-order Aeon — shipping Q3 2025</p>
+        <button class="cta-btn">Join Waitlist →</button>
+      </div>
+    </div>
+
+    <!-- Drives the scroll -->
+    <div id="scroll-container" style="height: 9000px;"></div>
+
+    <!-- GSAP & ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    
+    <!-- Lenis Smooth Scroll -->
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.29/dist/lenis.min.js"></script>
+    
+    <!-- Custom script -->
+    <script src="script.js"></script>
+</body>
+</html>
